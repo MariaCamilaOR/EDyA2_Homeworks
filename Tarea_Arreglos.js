@@ -1,3 +1,7 @@
+/* Ejecutar por separado
+Este es el ejemplo de empleo de cada comando de arreglos 
+
+
 // 1. at() 
 
 // Devuelve el elemento en el índice especificado
@@ -366,3 +370,4 @@ for (let value of valuesIterator) {
 // 'apple'
 // 'banana'
 // 'cherry'
+*/
