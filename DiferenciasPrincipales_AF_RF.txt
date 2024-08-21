@@ -1,0 +1,19 @@
+Diferencias principales
+
+
+        Funciones Normales
+
+Son útiles cuando necesitas una función con su propio contexto this, como en métodos de objetos o constructores.
+
+Uso de return	Requiere la palabra clave return para devolver un valor. Son más extensas, requiere la palabra clave function.	
+
+
+	Funciones Flecha
+
+Puede omitir return y las llaves {} si la función tiene una sola expresión.
+
+Más legible en funciones cortas y simples.
+
+Ideal para callbacks y funciones anidadas
+
+Puede reducir bastante las líneas de codigo

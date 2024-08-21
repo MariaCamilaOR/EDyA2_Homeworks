@@ -1,0 +1,48 @@
+/*
+Challenge: Create a new function in Regular and Arrow  
+types, which should receive a number and will print in 
+console if that number is either odd or even
+*/
+
+
+
+// Regular Function
+
+
+function verificarParidad(numero) {
+  // Verifica si el número es par
+  if (numero % 2 === 0) {
+    // Si el número es par, imprime en la consola
+    console.log(`${numero} es par`);
+  } else {
+    // Si el número es impar, imprime en la consola
+    console.log(`${numero} es impar`);
+  }
+}
+
+// Ingresar un número
+const numeroIngresado = prompt("Ingresa un número:");
+// Llamar a la función
+verificarParidad(Number(numeroIngresado));
+
+
+
+// Arrow Function
+
+
+const verificarParidad = (numero) => {
+  // Verifica si el número es par
+  if (numero % 2 === 0) {
+    // Si el número es par, imprime en la consola
+    console.log(`${numero} es par`);
+  } else {
+    // Si el número es impar, imprime en la consola
+    console.log(`${numero} es impar`);
+  }
+};
+
+// Solicita al usuario que ingrese un número
+const numeroIngresado = prompt("Ingresa un número:");
+// Convierte el valor ingresado a un número y llama a la función
+verificarParidad(Number(numeroIngresado));
+
