@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+/*
 function App() {
   return (
     <div className="App">
@@ -21,5 +21,18 @@ function App() {
     </div>
   );
 }
+*/
 
+const App = () =>{
+  return (
+    <>
+      <h1>
+        los pollitos dicen
+      </h1>
+      <h2>
+        pio pio pio
+      </h2>
+    </>
+  )
+}
 export default App;
