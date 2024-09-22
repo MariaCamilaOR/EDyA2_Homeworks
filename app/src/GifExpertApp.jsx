@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { AddCategory } from "../app/src/components/AddCategory";
-import { GifGrid } from "../app/src/components/GifGrid";
+import  {AddCategory}  from "./components/AddCategory";
+import  {GifGrid}  from "./components/GifGrid";
 
 export const GifExpertApp = () => {
 
   const [categories, setCategories] = useState(['Zodiac']);
 
   const onAddCategory = (category) => {
-    setCategories(list => [...list, category]);
+    setCategories(list => [category, ...list]);
   };
 
   return (
