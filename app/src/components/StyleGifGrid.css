@@ -1,0 +1,28 @@
+.gif-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0.1rem;
+}
+
+.gif-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.gif-item:hover {
+    transform: scale(1.05);
+}
+
+.gif-item img {
+    width: 100%;
+    height: auto;
+}
+
+.gif-item h4 {
+    text-align: center;
+    padding: 5px;
+    font-size: 1rem;
+}
