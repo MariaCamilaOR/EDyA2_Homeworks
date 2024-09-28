@@ -5,9 +5,7 @@ function App() {
   
 
   return (
-    <> <h1>
-    Challenge 11
-  </h1>
+    <> <h1>Challenge 12</h1>
   <FirstApp value={0} />
   <GifExpertApp/>
   </>

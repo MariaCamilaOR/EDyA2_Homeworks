@@ -1,11 +1,40 @@
-import { useEffect, useState } from "react";
-import {GifItem} from './GifItem'
-import './StyleGifGrid.css'
+import { useFetch } from '../hooks';
+import { GifItem } from './GifItem';
+import './StyleGifGrid.css';
 
-const key = "7jLF6CNn98PcQoXBeKsZdhAsYFkcOzCR";
-
-const getGifs = async (category) => {
+export const GifGrid = ({ category }) => {
+    const key = "7jLF6CNn98PcQoXBeKsZdhAsYFkcOzCR";
     const url = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${category}&limit=25&offset=0&rating=g&lang=en`;
+
+    // Usar el custom hook useFetch para obtener los datos
+    const { data: images, isLoading, hasError } = useFetch(url);
+    if(isLoading){
+        return(<h4>Loading...</h4>)
+    }
+
+    if(hasError){
+        return(<h4>Error: {hasError.message || "Error inesperado"}</h4>)
+    }
+
+    return (
+        <>
+            <h3>{category}</h3>
+                        
+            {isLoading && <h4>Loading...</h4>}
+
+            {hasError && <h4>Error: {hasError}</h4>}
+
+            <div className="gif-grid">
+                {images && Array.isArray(images.data) && images.data.map(({ id, title, images }) => (
+                    <GifItem key={id} title={title} url={images.original.url} />
+                ))}
+            </div>
+        </>
+    );
+};
+
+
+/*const url = `https://api.giphy.com/v1/gifs/search?api_key=${key}&q=${category}&limit=25&offset=0&rating=g&lang=en`;
     const resp = await fetch(url);
     const { data } = await resp.json();
 
@@ -21,33 +50,3 @@ const getGifs = async (category) => {
         url: img.images.downsized_medium.url
     }));
     */
-
-    return gifs;
-};
-
-export const GifGrid = ({ category }) => {
-    const [images, setImages] = useState([]);
-
-    // nueva función async para obtener los gifs
-    const fetchGifs = async () => {
-        const gifs = await getGifs(category);
-        setImages(gifs);
-        console.log(gifs); // imprimir la lista de gifs obtenidos
-    };
-
-    useEffect(() => {
-        fetchGifs();
-    }, [category]);
-
-    return (
-        <>
-            <h3>{category}</h3>
-            <div className="gif-grid">
-                {images.map(({ id, title, url }) => (
-                    <GifItem key={id} title={title} url={url} />
-                ))}
-            </div>
-        </>
-    );
-};
-
