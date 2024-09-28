@@ -1,9 +1,8 @@
 import { useState } from "react";
-import  {AddCategory}  from "./components/AddCategory";
-import  {GifGrid}  from "./components/GifGrid";
+import { AddCategory, GifGrid } from "./components"; // solo se coloca componetns gracias a lo de barrel
+
 
 export const GifExpertApp = () => {
-
   const [categories, setCategories] = useState(['Zodiac']);
 
   const onAddCategory = (category) => {
@@ -13,16 +12,13 @@ export const GifExpertApp = () => {
   return (
     <>
       <h1>GifExpert</h1>
-
       <AddCategory onAddCategory={onAddCategory} />
-
       <ol>
-        {
-          categories.map((category, key) => (
-            <GifGrid category={category} key={key} />
-          ))
-        }
+        {categories.map((category, index) => (
+          <GifGrid category={category} key={index} />
+        ))}
       </ol>
     </>
   );
 };
+
