@@ -1,3 +1,4 @@
+/*ya no se usa 
 import  {useCounter}  from './hooks';
 
 const FirstApp = ({ value }) => {
@@ -15,3 +16,4 @@ const FirstApp = ({ value }) => {
 };
 
 export default FirstApp;
+*/

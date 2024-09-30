@@ -3,7 +3,7 @@ import { AddCategory, GifGrid } from "./components"; // solo se coloca componetn
 
 
 export const GifExpertApp = () => {
-  const [categories, setCategories] = useState(['Zodiac']);
+  const [categories, setCategories] = useState(['Charizard']);
 
   const onAddCategory = (category) => {
     setCategories(list => [category, ...list]);
