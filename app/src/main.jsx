@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { TodoApp } from './components/TodoApp'; 
+import { App } from './hooks/App'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  
   <React.StrictMode>
-    <h1>Challenge 9</h1>
-    <TodoApp/>
-    
+    <h1>Parcial 2</h1>
+    <App />
   </React.StrictMode>
 );
