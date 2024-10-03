@@ -1,5 +1,5 @@
 
-import Calculator from '../components/Calculator'; // Ajustamos el path
+import Calculator from '../components/Calculator'; 
 
 export const App = () => {
   return (
