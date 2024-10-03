@@ -1,13 +1,13 @@
 import { useState } from "react";
 import Button from "./Button";
-import "./Calculator.Style.css";
-import { evaluate } from "mathjs"; //npm install mathjs
+import "./Calculator.Style.css"; // Estilos ctrl + Click
+import { evaluate } from "mathjs"; //npm install mathjs ejecutar eso en consola 
 
 const Calculator = () => {
-  const [input, setInput] = useState(""); // prueba con estefan
+  const [input, setInput] = useState(""); 
   const [result, setResult] = useState("");
 
-  const ClickBotoncitos = (valor) => {
+  const ClickBotoncitos = (valor) => { // Los botoncitos
     setInput(input + valor);
     setResult("");
   };
