@@ -1,43 +1,14 @@
-import { useReducer } from 'react';
-import { TodoReducer } from './TodoReducer';
 import { TodoList } from './TodoList';
 import { TodoAdd } from './TodoAdd';
-
-const initialState = [
-    {
-        id: new Date().getTime(),
-        description: 'Hacer los challenges',
-        done: false
-    }
-];
+import { useTodo } from '../hooks/useTODO'; // Importamos el hook
 
 export const TodoApp = () => {
-    const [todos, dispatch] = useReducer(TodoReducer, initialState);
-
-    const handleAddTodo = (newTodo) => {
-        dispatch({
-            type: 'ADD_TODO',
-            payload: newTodo
-        });
-    };
-
-    const handleToggleTodo = (id) => {
-        dispatch({
-            type: 'TOGGLE_TODO',
-            payload: id
-        });
-    };
-
-    const handleRemoveTodo = (id) => {
-        dispatch({
-            type: 'REMOVE_TODO',
-            payload: id
-        });
-    };
+    const { todos, handleAddTodo, handleToggleTodo, handleRemoveTodo, countTodos, countPendingTodos } = useTodo(); // Usamos el custom hook
 
     return (
         <div>
-            <h1>TodoApp ({todos.length})</h1>
+            <h1>TodoApp ({countTodos})</h1> {/* Muestra el total de todos */}
+            <p>Tareas Pendientes: {countPendingTodos}</p> {/* Muestra los todos pendientes */}
             <hr />
 
             <TodoAdd handleAddTodo={handleAddTodo} />
