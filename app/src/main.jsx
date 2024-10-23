@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { TodoApp } from './components/TodoApp'; 
+import { BrowserRouter } from 'react-router-dom';
+import { UserProvider } from './context/UserContext'; 
+import { AppRoutes } from './components/AppRoutes'; 
+import { NavComponent } from './components/shared/NavComponent'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  
   <React.StrictMode>
-    <h1>Challenge 16</h1>
-    <TodoApp/>
-    
+    <UserProvider>
+      <BrowserRouter>
+        <NavComponent />
+        <AppRoutes />
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>
 );
