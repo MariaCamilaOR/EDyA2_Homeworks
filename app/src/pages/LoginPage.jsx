@@ -7,10 +7,10 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        // simulación de datos de usuario al hacer login
+    // datos prueba de usuario al hacer login
         const userData = {
             id: 123,
-            name: 'usuario autenticado',
+            name: 'Ricardito de los pollos',
         };
 
         login(userData); // autenticar al usuario

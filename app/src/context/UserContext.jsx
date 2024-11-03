@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
 
     const login = (userData) => {
         setUser(userData); //  guarda sus datos al loguearse o log in como se escriba
+        localStorage.setItem('lastPath', window.location.pathname); // ultima pagina 
     };
 
     const logout = () => {

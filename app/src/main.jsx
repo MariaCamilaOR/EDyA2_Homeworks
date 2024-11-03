@@ -7,11 +7,11 @@ import { NavComponent } from './components/shared/NavComponent';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserProvider>
         <NavComponent />
         <AppRoutes />
-      </BrowserRouter>
-    </UserProvider>
+      </UserProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
