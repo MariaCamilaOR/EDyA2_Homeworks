@@ -1,22 +1,39 @@
 import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import { auth, googleProvider } from '../firebase/config';
+import { signInWithPopup, signOut } from 'firebase/auth';
 
-// crea el contexto
+// Crea el contexto
 export const UserContext = createContext();
 
-// estado del usuario
+// Estado del usuario
 export const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // sera null si no está autenticado
-    const navigate = useNavigate(); // navigate para redirigir tras logout
+    const [user, setUser] = useState(null); // Será null si no está autenticado
+    const navigate = useNavigate(); // Navigate para redirigir tras logout
 
-    const login = (userData) => {
-        setUser(userData); //  guarda sus datos al loguearse o log in como se escriba
-        localStorage.setItem('lastPath', window.location.pathname); // ultima pagina 
+    const login = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const userData = {
+                id: result.user.uid,
+                name: result.user.displayName,
+            };
+            setUser(userData); // Guarda los datos al iniciar sesión
+            localStorage.setItem('lastPath', window.location.pathname); // Guarda la última página
+            navigate(localStorage.getItem('lastPath') || '/', { replace: true });
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
+        }
     };
 
-    const logout = () => {
-        setUser(null); // si el usuario hace logout, elimina sus datos
-        navigate('/login', { replace: true }); // vuelve al login
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            setUser(null); // Elimina los datos de usuario al cerrar sesión
+            navigate('/login', { replace: true }); // Redirige al login
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+        }
     };
 
     return (

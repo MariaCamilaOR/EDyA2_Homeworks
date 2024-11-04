@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { UserContext } from './UserContext';
 
 export const UserProvider = ({ children }) => {
-  const [logged, setLogged] = useState(false);
+  const [user, setUser] = useState(null); 
 
   return (
-    <UserContext.Provider value={{ logged, setLogged }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

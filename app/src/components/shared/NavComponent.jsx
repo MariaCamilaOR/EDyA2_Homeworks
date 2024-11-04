@@ -1,24 +1,41 @@
-import { NavLink } from 'react-router-dom';
-import { useContext } from 'react'; // Importa useContext para acceder al contexto.
-import { UserContext } from '../../context/UserContext'; // Importa el contexto de usuario.
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import { logout } from '../../store/slices/authSlice'; 
 import './NavComponent.css';
 
 export const NavComponent = () => {
-    const { user, logout } = useContext(UserContext); // Obtiene el estado del usuario y la función de logout.
+    const { user, isAuthenticated } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // Usar useMemo para optimizar el renderizado basado en el estado de autenticación
+    const memoizedAuthStatus = useMemo(() => isAuthenticated, [isAuthenticated]);
+
+    const handleLogout = () => {
+        dispatch(logout()); 
+        navigate('/login', { replace: true });
+    };
 
     return (
         <nav className="nav-container">
-            {/* Enlaces de navegación */}
             <NavLink to="/" className={({ isActive }) => (isActive ? 'active-link' : '')}>Home</NavLink>
             <NavLink to="/about" className={({ isActive }) => (isActive ? 'active-link' : '')}>About</NavLink>
 
-            {user ? (
+            {memoizedAuthStatus ? (
                 <>
-                    <span>Bienvenido, {user.name}</span> {/* Muestra el nombre del usuario */}
-                    <button onClick={logout}>Logout</button> {/* Botón de logout */}
+                    <span>Bienvenido, {user?.name || user?.displayName}</span>
+                    <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
-                <NavLink to="/login" className={({ isActive }) => (isActive ? 'active-link' : '')}>Login</NavLink>
+                <>
+                    <NavLink to="/register" className={({ isActive }) => (isActive ? 'active-link' : '')}>
+                        <button disabled={memoizedAuthStatus}>Register</button>
+                    </NavLink>
+                    <NavLink to="/login" className={({ isActive }) => (isActive ? 'active-link' : '')}>
+                        <button disabled={memoizedAuthStatus}>Login</button>
+                    </NavLink>
+                </>
             )}
         </nav>
     );

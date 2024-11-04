@@ -1,35 +1,31 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { loginWithEmail, loginWithGoogle } from '../store/slices/authSlice';
+import { registerWithEmail } from '../store/slices/authSlice';
 import { useEffect, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './pagesstyles.css';
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const authError = useSelector((state) => state.auth.error);
     const loading = useSelector((state) => state.auth.loading);
     const navigate = useNavigate();
+    
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [formError, setFormError] = useState('');
 
-    const handleLoginWithEmail = (e) => {
+    const handleRegister = (e) => {
         e.preventDefault();
-
-        // Validación local: verificar que los campos no estén vacíos
-        if (!email || !password) {
-            setFormError('Por favor, rellena todos los campos.');
+        // Validar que las contraseñas coincidan
+        if (password !== confirmPassword) {
+            setFormError('Las contraseñas no coinciden.');
             return;
         }
-
-        // Limpiar errores locales antes de enviar
         setFormError('');
-        dispatch(loginWithEmail({ email, password }));
-    };
-
-    const handleLoginWithGoogle = () => {
-        dispatch(loginWithGoogle());
+        dispatch(registerWithEmail({ name, email, password }));
     };
 
     useEffect(() => {
@@ -41,8 +37,17 @@ export const LoginPage = () => {
 
     return (
         <div className="page-container">
-            <h1>Login</h1>
-            <form onSubmit={handleLoginWithEmail}>
+            <h1>Register</h1>
+            <form onSubmit={handleRegister}>
+                <div>
+                    <label>Nombre:</label>
+                    <input 
+                        type="text" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required 
+                    />
+                </div>
                 <div>
                     <label>Email:</label>
                     <input 
@@ -61,21 +66,22 @@ export const LoginPage = () => {
                         required 
                     />
                 </div>
-                {/* Mostrar error de validación local */}
+                <div>
+                    <label>Confirmar Contraseña:</label>
+                    <input 
+                        type="password" 
+                        value={confirmPassword} 
+                        onChange={(e) => setConfirmPassword(e.target.value)} 
+                        required 
+                    />
+                </div>
                 {formError && <p className="error-message">{formError}</p>}
-                {/* Mostrar error de autenticación de Redux */}
                 {authError && <p className="error-message">{authError}</p>}
                 <button type="submit" disabled={loading}>
-                    {loading ? 'Iniciando...' : 'Login with Email'}
+                    {loading ? 'Registrando...' : 'Registrar'}
                 </button>
             </form>
-            <hr />
-            <button onClick={handleLoginWithGoogle} disabled={loading}>
-                {loading ? 'Procesando...' : 'Login with Google'}
-            </button>
-            <p>
-                ¿No tienes una cuenta? <NavLink to="/register">Regístrate aquí</NavLink>
-            </p>
         </div>
     );
 };
+
