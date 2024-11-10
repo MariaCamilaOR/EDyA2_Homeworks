@@ -1,0 +1,15 @@
+/* src/components/AddTodoForm.css */
+form {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  button {
+    padding: 10px;
+  }
+  

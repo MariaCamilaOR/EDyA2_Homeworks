@@ -1,0 +1,23 @@
+/* src/components/TodoList.css */
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  li.completed {
+    text-decoration: line-through;
+    color: grey;
+  }
+  
+  li input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
